@@ -8,7 +8,7 @@
 > remains future work (see [docs/LIMITATIONS.md](docs/LIMITATIONS.md)).
 >
 > Module 2 (numerical-text surrogate, multimodal fusion and NSGA-II optimisation) is a separate repository:
-> `https://github.com/<your-github-username>/module2-numerical-surrogate-antenna-design`.
+> `https://github.com/rathiabeth/module2-numerical-surrogate-antenna-design`.
 
 ![poster](poster/module1_poster.png)
 
@@ -44,7 +44,7 @@ Label rules, the image standard and the QC record are in [docs/DATA_CARD.md](doc
 ## Installation
 
 ```bash
-git clone https://github.com/<your-github-username>/module1-vit-antenna-image-classification.git
+git clone https://github.com/rathiabeth/module1-vit-antenna-image-classification.git
 cd module1-vit-antenna-image-classification
 python -m venv .venv
 source .venv/bin/activate            # Windows: .venv\Scripts\activate

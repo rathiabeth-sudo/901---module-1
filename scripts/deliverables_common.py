@@ -28,8 +28,8 @@ MODULE = "Module 1 - Image-Based Vision Transformer"
 TITLE = "Vision Transformer-Based Visual Analysis of Hybrid-Slotted DGS Compact Patch Antennas"
 SUBTITLE = "Module 1 of the Applied Vision Transformer Framework for 5G and Emerging 6G Networks - Proof-of-Concept Prototype"
 # Set this once after creating the GitHub repository; every deliverable reads it from here.
-REPO_URL = "https://github.com/<your-github-username>/module1-vit-antenna-image-classification"
-COMPANION_URL = "https://github.com/<your-github-username>/module2-numerical-surrogate-antenna-design"
+REPO_URL = "https://github.com/rathiabeth/module1-vit-antenna-image-classification"
+COMPANION_URL = "https://github.com/rathiabeth/module2-numerical-surrogate-antenna-design"
 
 
 def j(name):
@@ -93,3 +93,22 @@ def hypotheses(R) -> list[tuple[str, str, str]]:
     out.append(("H5", "Lower macro-F1 on OOD (W/L > 1.95)",
                 f"{'Supported' if ok else 'Not supported'}: OOD {R['fmt'](vood)} vs test {R['fmt'](vit)} (confounded by class balance)"))
     return out
+
+
+BRANCH = "main"
+
+
+def gh(path: str, folder: bool = False) -> str:
+    """Clickable GitHub link to a file (blob) or folder (tree) in this repository."""
+    return f"{REPO_URL}/{'tree' if folder else 'blob'}/{BRANCH}/{path}"
+
+
+def link(path: str, folder: bool = False, label: str | None = None) -> str:
+    """Report markup [label](url) that report_render turns into a hyperlink."""
+    return f"[{label or path}]({gh(path, folder)})"
+
+
+def test_summary() -> str:
+    """Last line of the stored pytest output, e.g. '18 passed in 4.18s'."""
+    lines = [l.strip() for l in (ROOT / "results" / "test_report.txt").read_text(encoding="utf-8").splitlines() if l.strip()]
+    return lines[-1] if lines else "not run"

@@ -3,7 +3,7 @@
 Block types
   ("h1", text) ("h2", text) ("p", text) ("bullets", [..]) ("numbered", [..])
   ("table", caption, header, rows) ("figure", path, caption, width_in) ("code", text) ("pagebreak",)
-Inline **bold** is supported in paragraphs, bullets and table cells.
+Inline **bold**, [label](url) and bare https:// URLs are supported in paragraphs, bullets and table cells.
 """
 from __future__ import annotations
 
@@ -40,17 +40,64 @@ def _field(paragraph, instr: str):
         r._r.append(el)
 
 
+# [label](https://...) or a bare https://... URL (trailing punctuation is not part of the link)
+LINK_RE = re.compile(r"\[([^\]]+)\]\((https?://[^)\s]+)\)|(https?://[^\s)]*[^\s).,;:])")
+HYPERLINK_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink"
+
+
+def _hyperlink(paragraph, url, text, size=None, bold=False):
+    """Append a clickable external hyperlink (blue, underlined) to a paragraph."""
+    rid = paragraph.part.relate_to(url, HYPERLINK_REL, is_external=True)
+    h = OxmlElement("w:hyperlink")
+    h.set(qn("r:id"), rid)
+    r = OxmlElement("w:r")
+    rPr = OxmlElement("w:rPr")
+    if bold:
+        rPr.append(OxmlElement("w:b"))
+    c = OxmlElement("w:color")
+    c.set(qn("w:val"), "1F5FA8")
+    rPr.append(c)
+    if size:
+        sz = OxmlElement("w:sz")
+        sz.set(qn("w:val"), str(int(round(size * 2))))
+        rPr.append(sz)
+    u = OxmlElement("w:u")
+    u.set(qn("w:val"), "single")
+    rPr.append(u)
+    r.append(rPr)
+    t = OxmlElement("w:t")
+    t.set(qn("xml:space"), "preserve")
+    t.text = text
+    r.append(t)
+    h.append(r)
+    paragraph._p.append(h)
+
+
+def _plain(paragraph, text, bold, size, color):
+    run = paragraph.add_run(text)
+    run.bold = bold or None
+    if size:
+        run.font.size = Pt(size)
+    if color:
+        run.font.color.rgb = color
+
+
 def _runs(paragraph, text, size=None, color=None):
+    """Inline **bold**, [label](url) and bare URLs (rendered as clickable links)."""
     for part in BOLD_RE.split(text):
         if not part:
             continue
         bold = part.startswith("**") and part.endswith("**")
-        run = paragraph.add_run(part[2:-2] if bold else part)
-        run.bold = bold or None
-        if size:
-            run.font.size = Pt(size)
-        if color:
-            run.font.color.rgb = color
+        body = part[2:-2] if bold else part
+        pos = 0
+        for m in LINK_RE.finditer(body):
+            if m.start() > pos:
+                _plain(paragraph, body[pos:m.start()], bold, size, color)
+            label, url = (m.group(1), m.group(2)) if m.group(2) else (m.group(3), m.group(3))
+            _hyperlink(paragraph, url, label, size, bold)
+            pos = m.end()
+        if pos < len(body):
+            _plain(paragraph, body[pos:], bold, size, color)
 
 
 def _shade(cell, hex_fill):
@@ -133,8 +180,9 @@ def title_page(doc, meta):
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
     for k, v in meta["fields"]:
         c = t.add_row().cells
-        c[0].text, c[1].text = k, v
+        c[0].text = k
         c[0].paragraphs[0].runs[0].bold = True
+        _runs(c[1].paragraphs[0], v)
         c[0].width, c[1].width = Cm(5), Cm(9)
     doc.add_paragraph()
     p = doc.add_paragraph()
@@ -213,11 +261,25 @@ UNI = {"≤": r"$\leq$", "≥": r"$\geq$", "±": r"$\pm$", "×": r"$\times$", "�
        "−": "-", "·": r"$\cdot$", "≠": r"$\neq$", "↔": r"$\leftrightarrow$", "…": r"\ldots{}", "κ": r"$\kappa$", "∈": r"$\in$"}
 
 
-def esc(s: str) -> str:
+def _esc_plain(s: str) -> str:
     out = "".join(TEX_ESC.get(ch, ch) for ch in s)
     for k, v in UNI.items():
         out = out.replace(k, v)
-    return re.sub(r"\*\*([^*]+)\*\*", r"\\textbf{\1}", out)
+    return out
+
+
+def esc(s: str) -> str:
+    """Escape text for LaTeX: [label](url) -> \\href, bare URLs -> \\url, **bold** -> \\textbf."""
+    out, pos = [], 0
+    for m in LINK_RE.finditer(s):
+        out.append(_esc_plain(s[pos:m.start()]))
+        if m.group(2):
+            out.append(r"\href{" + m.group(2).replace("%", r"\%").replace("#", r"\#") + "}{" + _esc_plain(m.group(1)) + "}")
+        else:
+            out.append(r"\url{" + m.group(3) + "}")
+        pos = m.end()
+    out.append(_esc_plain(s[pos:]))
+    return re.sub(r"\*\*([^*]+)\*\*", r"\\textbf{\1}", "".join(out))
 
 
 def to_tex(blocks, meta, out: Path, fig_prefix="../results/figures/"):

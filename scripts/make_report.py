@@ -6,8 +6,47 @@ from __future__ import annotations
 
 import pandas as pd
 
-from deliverables_common import COMPANION_URL, FIG, REPO_URL, ROOT, SUBTITLE, TITLE, hypotheses, load
+from deliverables_common import COMPANION_URL, FIG, REPO_URL, ROOT, SUBTITLE, TITLE, hypotheses, link, load, test_summary
 from report_render import to_docx, to_tex
+
+
+def availability(C) -> list:
+    """Section with clickable links to the data, scripts, tests and outputs in the GitHub repository."""
+    L = link
+    rows = [
+        ["**Data**", "Patch dataset source (2,051 openEMS designs, MIT)", "[Hugging Face, rev. 4be72a2](https://huggingface.co/datasets/becklabash/rectangular-patch-antenna-freq-response)"],
+        ["", "RadPat-50K source (CC BY 4.0)", "[Zenodo 10.5281/zenodo.17067881](https://doi.org/10.5281/zenodo.17067881)"],
+        ["", "Processed design table (parameters, S11 targets, labels, split)", L("data/processed/patch_designs.csv")],
+        ["", "Standardised 224 × 224 geometry images (one per design)", L("data/processed/patch_images", folder=True)],
+        ["", "RadPat sample table with beamwidth labels", L("data/processed/radpat_designs.csv")],
+        ["", "Locked split manifests (train / val / test / OOD)", L("data/splits", folder=True)],
+        ["", "Data dictionary and preprocessing log", L("data/data_dictionary.csv") + "; " + L("data/processed/preprocessing_log.json")],
+        ["", "Configuration (seed, thresholds, hyperparameters)", L("configs/default.yaml")],
+        ["**Scripts**", "Download and preprocessing (labels, rendering, split)", L("src/download_data.py") + "; " + L("src/preprocessing.py") + "; " + L("src/dataset.py")],
+        ["", "ViT-S/16 fine-tuning and linear probe", L("src/train_vit.py") + "; " + L("src/train_common.py")],
+        ["", "Majority and compact CNN baselines", L("src/train_baseline.py")],
+        ["", "Evaluation, statistics and figures", L("src/evaluate.py") + "; " + L("src/select_final.py")],
+        ["", "Attention rollout, robustness and OOD tests", L("src/explainability.py")],
+        ["", "Full experiment queue", L("scripts/run_experiments.ps1") + "; " + L("scripts/run_experiments.sh")],
+        ["", "Report, slides, poster and diagram generators", L("scripts", folder=True)],
+        ["**Tests**", "Label rules, S11 extraction, rendering determinism", L("tests/test_preprocessing.py")],
+        ["", "Split disjointness, OOD rule, physical ranges, leakage checks", L("tests/test_dataset_integrity.py")],
+        ["", f"Stored pytest output ({test_summary()})", L("results/test_report.txt")],
+        ["**Outputs**", "Summary table of every model and split", L("results/metrics/summary_table.csv")],
+        ["", "Per-run metrics, training histories, McNemar and bootstrap tests", L("results/metrics", folder=True)],
+        ["", "Per-design test predictions with calibrated confidence", L("results/predictions", folder=True)],
+        ["", "Explainability summary (attention enrichment, robustness)", L("results/metrics/explainability_summary.json")],
+        ["", "All figures used in this report", L("results/figures", folder=True)],
+        ["", "Image embeddings handed to Module 2", L("results/features", folder=True)],
+        ["", "Report, slides and poster", L("reports", folder=True) + "; " + L("presentations", folder=True) + "; " + L("poster", folder=True)],
+    ]
+    return [
+        ("h1", "Data, Code and Output Availability"),
+        ("p", f"All data derivatives, code, tests and outputs of Module 1 are public in the GitHub repository {REPO_URL}. "
+              "Each entry below links directly to the file or folder; raw third-party archives are linked at their source because "
+              "they are re-downloaded with checksums rather than redistributed. Module 2 is at " + COMPANION_URL + "."),
+        ("table", C.tab("Links to the data, scripts, tests and outputs of Module 1 (branch main)."), ["Category", "Content", "Link"], rows),
+    ]
 
 
 class Counter:
@@ -97,15 +136,16 @@ def build(R) -> list:
             "NSGA-II optimisation form Module 2, which is documented in a separate report and repository "
             f"({COMPANION_URL}). The only artefact Module 1 passes to Module 2 is the 384-dimensional image embedding of each design."))
     a(("table", C.tab("Implementation status of Module 1."), ["Component", "Status", "Evidence in repository"], [
-        ["Dataset discovery and licence verification", "Completed", "docs/DATASET_SURVEY.md"],
-        ["Preprocessing, standardised images, labels, locked splits", "Completed and executed", "src/preprocessing.py, src/dataset.py, data/"],
-        ["ViT-S/16 partial fine-tuning and frozen linear probe", "Completed and executed", "src/train_vit.py, results/metrics/"],
-        ["Majority and compact CNN baselines", "Completed and executed", "src/train_baseline.py"],
-        ["Statistical comparison (McNemar, bootstrap CI)", "Completed and executed", "src/evaluate.py"],
-        ["Attention rollout, robustness and OOD tests", "Completed and executed", "src/explainability.py"],
-        ["Embedding export for Module 2 fusion", "Completed and executed", "results/features/"],
+        ["Dataset discovery and licence verification", "Completed", link("docs/DATASET_SURVEY.md")],
+        ["Preprocessing, standardised images, labels, locked splits", "Completed and executed", link("src/preprocessing.py") + ", " + link("src/dataset.py") + ", " + link("data", folder=True)],
+        ["ViT-S/16 partial fine-tuning and frozen linear probe", "Completed and executed", link("src/train_vit.py") + ", " + link("results/metrics", folder=True)],
+        ["Majority and compact CNN baselines", "Completed and executed", link("src/train_baseline.py")],
+        ["Statistical comparison (McNemar, bootstrap CI)", "Completed and executed", link("src/evaluate.py")],
+        ["Attention rollout, robustness and OOD tests", "Completed and executed", link("src/explainability.py")],
+        ["Automated tests", "Completed and executed", link("tests", folder=True) + ", " + link("results/test_report.txt")],
+        ["Embedding export for Module 2 fusion", "Completed and executed", link("results/features", folder=True)],
         ["HFSS hybrid-slotted DGS images (geometry, current, E-field)", "Proposed (HFSS unavailable)", "Section 11"],
-        ["Block diagram (Figure 1)", "Illustrative", "results/figures/module1_architecture.png"],
+        ["Block diagram (Figure 1)", "Illustrative", link("results/figures/module1_architecture.png")],
     ]))
     a(("figure", FIG / "module1_architecture.png", C.fig("Module 1 block diagram. Solid boxes were implemented and executed; dashed orange boxes are proposed work that requires Ansys HFSS. The thumbnails are real model inputs."), 6.3))
 
@@ -191,8 +231,9 @@ def build(R) -> list:
                    "Training-only augmentation: horizontal mirror (justified because the patch is symmetric about its length axis), rotation "
                    "of ±3° and translation of up to 2%. Scale augmentation was excluded because it would change the apparent physical size "
                    "and therefore the label."]))
-    a(("p", "The data dictionary is in Appendix A. Every count and threshold is logged in data/processed/preprocessing_log.json, and "
-            "the rules are enforced by 18 automated tests (Section 10)."))
+    a(("p", f"The data dictionary is in Appendix A and online at {link('data/data_dictionary.csv')}. Every count and threshold is "
+            f"logged in {link('data/processed/preprocessing_log.json')}, the split manifests are in {link('data/splits', folder=True)}, "
+            "and the rules are enforced by 18 automated tests (Section 10)."))
 
     # ------------------------------------------------------------------ 5 Model
     a(("h1", "5. Proposed Model: Vision Transformer"))
@@ -397,6 +438,9 @@ def build(R) -> list:
             "than inspecting heat maps. The pipeline is ready to be pointed at the HSDGS-ViT dataset, which is the step needed to test "
             "the original research claim."))
 
+    # ------------------------------------------------------------------ Availability
+    B.extend(availability(C))
+
     # ------------------------------------------------------------------ References
     a(("h1", "References"))
     a(("numbered", REFERENCES))
@@ -429,8 +473,9 @@ def build(R) -> list:
                "python -m src.preprocessing\npytest -q\n"
                "powershell -File scripts\\run_experiments.ps1      # or: bash scripts/run_experiments.sh  (~4 h on CPU)\n"
                "python scripts/make_deliverables.py"))
-    a(("p", f"Repository: {REPO_URL}. The pytest output is stored in results/test_report.txt; environment, runtimes and determinism "
-            "notes are in docs/REPRODUCIBILITY.md."))
+    a(("p", f"Repository: {REPO_URL}. The pytest output ({test_summary()}) is stored in {link('results/test_report.txt')}; "
+            f"environment, runtimes and determinism notes are in {link('docs/REPRODUCIBILITY.md')}. All links are listed in the "
+            "section Data, Code and Output Availability."))
     return B
 
 
