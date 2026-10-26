@@ -1,0 +1,112 @@
+{
+  "patch_raw_rows": 2051,
+  "patch_excluded": [],
+  "patch_positive_s11_designs": 1170,
+  "patch_duplicate_parameter_rows": 0,
+  "patch_exact_duplicate_images": 0,
+  "patch_identical_phash_pairs": 21561,
+  "patch_split_counts": {
+    "train": 1220,
+    "ood": 307,
+    "test": 262,
+    "val": 262
+  },
+  "patch_perf_by_split": {
+    "0": {
+      "ood": 80,
+      "test": 28,
+      "train": 128,
+      "val": 27
+    },
+    "1": {
+      "ood": 112,
+      "test": 57,
+      "train": 269,
+      "val": 58
+    },
+    "2": {
+      "ood": 115,
+      "test": 177,
+      "train": 823,
+      "val": 177
+    }
+  },
+  "patch_band_by_split": {
+    "0": {
+      "ood": 116,
+      "test": 168,
+      "train": 761,
+      "val": 165
+    },
+    "1": {
+      "ood": 61,
+      "test": 54,
+      "train": 246,
+      "val": 51
+    },
+    "2": {
+      "ood": 130,
+      "test": 40,
+      "train": 213,
+      "val": 46
+    }
+  },
+  "render_constants": {
+    "abs_max_width_mm": 106.0,
+    "abs_max_length_mm": 53.0,
+    "panel_height_px": 112,
+    "abs_margin_px": 4,
+    "norm_margin_px": 12,
+    "feed_radius_px": 2.2,
+    "background_rgb": [
+      236,
+      239,
+      243
+    ],
+    "patch_rgb": [
+      196,
+      134,
+      52
+    ],
+    "feed_rgb": [
+      20,
+      20,
+      20
+    ],
+    "separator_rgb": [
+      130,
+      130,
+      130
+    ]
+  },
+  "radpat_raw_rows": 10000,
+  "radpat_D_sentinel_minus120": 5015,
+  "radpat_excluded": [],
+  "radpat_exact_duplicates": 0,
+  "radpat_hpbw_thresholds_deg": [
+    6.48,
+    17.82
+  ],
+  "radpat_split_counts": {
+    "train": 2100,
+    "val": 450,
+    "test": 450
+  },
+  "radpat_hpbw_by_split": {
+    "0": {
+      "test": 121,
+      "train": 686,
+      "val": 137
+    },
+    "1": {
+      "test": 166,
+      "train": 707,
+      "val": 151
+    },
+    "2": {
+      "test": 163,
+      "train": 707,
+      "val": 162
+    }
+  }
+}

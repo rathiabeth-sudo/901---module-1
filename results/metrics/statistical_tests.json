@@ -1,0 +1,75 @@
+{
+  "final_mode": "finetune",
+  "mcnemar_finetune_vs_cnn_perf_class_s42": {
+    "a_correct_b_wrong": 5,
+    "a_wrong_b_correct": 23,
+    "exact_p_value": 0.0009122341871261597
+  },
+  "mcnemar_finetune_vs_linearprobe_perf_class_s42": {
+    "a_correct_b_wrong": 27,
+    "a_wrong_b_correct": 51,
+    "exact_p_value": 0.008771714457060136
+  },
+  "mcnemar_finetune_vs_cnn_band_class_s42": {
+    "a_correct_b_wrong": 15,
+    "a_wrong_b_correct": 26,
+    "exact_p_value": 0.11727520595741225
+  },
+  "mcnemar_finetune_vs_linearprobe_band_class_s42": {
+    "a_correct_b_wrong": 16,
+    "a_wrong_b_correct": 57,
+    "exact_p_value": 1.5256583158538737e-06
+  },
+  "mcnemar_finetune_revised_vs_cnn_perf_class_s42": {
+    "a_correct_b_wrong": 10,
+    "a_wrong_b_correct": 13,
+    "exact_p_value": 0.6776394844055176
+  },
+  "mcnemar_finetune_revised_vs_linearprobe_perf_class_s42": {
+    "a_correct_b_wrong": 32,
+    "a_wrong_b_correct": 41,
+    "exact_p_value": 0.34918183817058834
+  },
+  "mcnemar_finetune_noaug_vs_cnn_perf_class_s42": {
+    "a_correct_b_wrong": 19,
+    "a_wrong_b_correct": 10,
+    "exact_p_value": 0.13604594767093658
+  },
+  "mcnemar_finetune_noaug_vs_linearprobe_perf_class_s42": {
+    "a_correct_b_wrong": 27,
+    "a_wrong_b_correct": 24,
+    "exact_p_value": 0.7797679305530743
+  },
+  "bootstrap95_macro_f1_vit_finetune_patch_perf_class_s42": [
+    0.513674853886569,
+    0.6420702588784531
+  ],
+  "bootstrap95_macro_f1_vit_finetune_revised_patch_perf_class_s42": [
+    0.572860421047324,
+    0.7070817359189554
+  ],
+  "bootstrap95_macro_f1_vit_finetune_noaug_patch_perf_class_s42": [
+    0.666750030208473,
+    0.7762980731101927
+  ],
+  "bootstrap95_macro_f1_cnn_noaug_patch_perf_class_s42": [
+    0.5968487730429822,
+    0.7230516286763958
+  ],
+  "bootstrap95_macro_f1_cnn_patch_perf_class_s42": [
+    0.5886229140499554,
+    0.7153258258679177
+  ],
+  "bootstrap95_macro_f1_vit_linearprobe_patch_perf_class": [
+    0.6453495513788038,
+    0.7610601691829487
+  ],
+  "bootstrap95_macro_f1_vit_finetune_patch_band_class_s42": [
+    0.6250938857931178,
+    0.7358556857925496
+  ],
+  "bootstrap95_macro_f1_vit_finetune_radpat_hpbw_class_s42": [
+    0.8515955271975588,
+    0.9085187536132882
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "run": "vit_linearprobe_radpat_hpbw_class",
+  "task": "hpbw_class",
+  "temperature": 1.0587294101715088,
+  "mode": "linear_probe",
+  "dataset": "radpat",
+  "C": 0.03,
+  "best_val_macro_f1": 0.8728292161127982,
+  "model": "vit_small_patch16_224.augreg_in21k_ft_in1k",
+  "trainable_params": 1155,
+  "splits": {
+    "train": {
+      "n": 2100,
+      "accuracy": 0.9195238095238095,
+      "macro_precision": 0.9202399526340815,
+      "macro_recall": 0.9195556581897257,
+      "macro_f1": 0.9198162816466843,
+      "weighted_f1": 0.9196643706079074,
+      "balanced_accuracy": 0.9195556581897257,
+      "ece": 0.05107881298838691,
+      "confusion_matrix": [
+        [
+          633,
+          52,
+          1
+        ],
+        [
+          35,
+          629,
+          43
+        ],
+        [
+          0,
+          38,
+          669
+        ]
+      ],
+      "per_class": {
+        "Narrow": {
+          "precision": 0.9476047904191617,
+          "recall": 0.922740524781341,
+          "f1": 0.9350073855243722,
+          "support": 686
+        },
+        "Medium": {
+          "precision": 0.874826147426982,
+          "recall": 0.8896746817538896,
+          "f1": 0.8821879382889201,
+          "support": 707
+        },
+        "Wide": {
+          "precision": 0.938288920056101,
+          "recall": 0.9462517680339463,
+          "f1": 0.9422535211267605,
+          "support": 707
+        }
+      },
+      "roc_auc_ovr_macro": 0.9895937796371103,
+      "ece_uncalibrated": 0.04397959661445846
+    },
+    "val": {
+      "n": 450,
+      "accuracy": 0.8711111111111111,
+      "macro_precision": 0.8746661768492857,
+      "macro_recall": 0.8715045591344716,
+      "macro_f1": 0.8728292161127982,
+      "weighted_f1": 0.8718192586849303,
+      "balanced_accuracy": 0.8715045591344716,
+      "ece": 0.02256759483301106,
+      "confusion_matrix": [
+        [
+          123,
+          14,
+          0
+        ],
+        [
+          8,
+          125,
+          18
+        ],
+        [
+          0,
+          18,
+          144
+        ]
+      ],
+      "per_class": {
+        "Narrow": {
+          "precision": 0.9389312977099237,
+          "recall": 0.8978102189781022,
+          "f1": 0.917910447761194,
+          "support": 137
+        },
+        "Medium": {
+          "precision": 0.7961783439490446,
+          "recall": 0.8278145695364238,
+          "f1": 0.8116883116883117,
+          "support": 151
+        },
+        "Wide": {
+          "precision": 0.8888888888888888,
+          "recall": 0.8888888888888888,
+          "f1": 0.8888888888888888,
+          "support": 162
+        }
+      },
+      "roc_auc_ovr_macro": 0.9699855531601399,
+      "ece_uncalibrated": 0.023364803526027274
+    },
+    "test": {
+      "n": 450,
+      "accuracy": 0.8822222222222222,
+      "macro_precision": 0.8839082462253195,
+      "macro_recall": 0.8857368326421337,
+      "macro_f1": 0.8838798322607122,
+      "weighted_f1": 0.8811412381858978,
+      "balanced_accuracy": 0.8857368326421337,
+      "ece": 0.0134599669298688,
+      "confusion_matrix": [
+        [
+          111,
+          9,
+          1
+        ],
+        [
+          12,
+          133,
+          21
+        ],
+        [
+          0,
+          10,
+          153
+        ]
+      ],
+      "per_class": {
+        "Narrow": {
+          "precision": 0.9024390243902439,
+          "recall": 0.9173553719008265,
+          "f1": 0.9098360655737705,
+          "support": 121
+        },
+        "Medium": {
+          "precision": 0.875,
+          "recall": 0.8012048192771084,
+          "f1": 0.8364779874213837,
+          "support": 166
+        },
+        "Wide": {
+          "precision": 0.8742857142857143,
+          "recall": 0.9386503067484663,
+          "f1": 0.9053254437869822,
+          "support": 163
+        }
+      },
+      "roc_auc_ovr_macro": 0.9753932472966729,
+      "ece_uncalibrated": 0.021089961961142167
+    }
+  }
+}

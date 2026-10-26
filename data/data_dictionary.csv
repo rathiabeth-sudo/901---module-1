@@ -1,0 +1,26 @@
+dataset,variable,type,unit,description
+patch,design_id,string,-,Unique design key (P + source id); one image per design
+patch,length_mm,float,mm,Patch length L (resonant dimension)
+patch,width_mm,float,mm,Patch width W
+patch,feed_y_mm,float,mm,Coaxial feed offset from patch centre along L (negative toward edge)
+patch,f_res_ghz,float,GHz,First matched resonance: lowest-frequency local S11 minimum below -10 dB (global minimum if never matched)
+patch,f_deepest_ghz,float,GHz,Frequency of the deepest S11 dip in 1-10 GHz (often a higher-order mode)
+patch,s11_min_db,float,dB,Global minimum simulated S11 over 1-10 GHz (openEMS FDTD); defines perf_class
+patch,s11_at_res_db,float,dB,Simulated S11 at f_res
+patch,bw10_mhz,float,MHz,Contiguous -10 dB bandwidth around resonance (0 if unmatched)
+patch,fbw10_pct,float,%,Fractional -10 dB bandwidth
+patch,wl_ratio,float,-,W/L aspect ratio
+patch,feed_ratio,float,-,"Feed offset normalised by L/2 (0 centre, 1 edge)"
+patch,area_mm2,float,mm^2,Patch area W x L
+patch,perf_class,int,0/1/2,"Poor (S11min > -10 dB), Acceptable (-20 < S11min <= -10), High (S11min <= -20 dB)"
+patch,band_class,int,0/1/2,f_res < 5 GHz | 5-7.125 GHz | >= 7.125 GHz (3GPP FR1 / FR3 boundary)
+patch,split,category,train/val/test/ood,Locked design-level allocation (seed 42)
+patch,image_path,string,-,Rendered standardised geometry image (224x224 PNG)
+radpat,design_id,string,-,R + RadPat sample id
+radpat,N,int,-,Number of array elements
+radpat,spacing_wavelengths,float,lambda,Element spacing
+radpat,weights,category,-,"Amplitude taper (uniform, binomial, cosine, kaiser, hamming, hann, blackman, exponential)"
+radpat,steering_deg_nominal,float,deg,Nominal steering angle
+radpat,HPBW_deg,float,deg,Half-power beamwidth reported by dataset authors
+radpat,D_peak_dBi,float,dBi,Peak directivity; value -120 is a sentinel (not used as label)
+radpat,hpbw_class,int,0/1/2,Narrow/Medium/Wide beam from training-split HPBW terciles

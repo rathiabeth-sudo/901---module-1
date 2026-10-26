@@ -1,0 +1,54 @@
+﻿=== START -m src.train_vit --dataset patch --task perf_class --mode linear_probe 10/25/2026 21:10:53
+=== END -m src.train_vit --dataset patch --task perf_class --mode linear_probe 10/25/2026 21:13:16
+
+[vit_linearprobe_patch_perf_class] TEST acc=0.718 macroF1=0.709 balAcc=0.729 ECE=0.057
+
+
+=== START -m src.train_baseline --dataset patch --task perf_class --model cnn --seed 42 10/25/2026 21:13:16
+=== END -m src.train_baseline --dataset patch --task perf_class --model cnn --seed 42 10/25/2026 21:13:58
+=== START -m src.train_vit --dataset patch --task perf_class --mode finetune --seed 42 10/25/2026 21:13:58
+=== START cnn_patch_perf_class_s42 10/25/2026 21:14:01
+=== END   cnn_patch_perf_class_s42 10/25/2026 21:24:07  [cnn_patch_perf_class_s42] TEST acc=0.695 macroF1=0.658 balAcc=0.690 ECE=0.061
+=== START vit_finetune_patch_perf_class_s42 10/25/2026 21:24:07
+=== END   vit_finetune_patch_perf_class_s42 10/25/2026 21:51:31  [vit_finetune_patch_perf_class_s42] TEST acc=0.626 macroF1=0.581 balAcc=0.648 ECE=0.066
+=== START cnn_patch_perf_class_s43 10/25/2026 21:51:31
+=== PAUSED 10/25/2026 21:52:38: pre-registered ViT config underfit (val F1 0.660 < linear-probe val 0.702); adding validation-selected revised config
+=== START vit_finetune_revised_patch_perf_class_s42 10/25/2026 21:53:36
+=== START vit__patch_band_class_s42 10/25/2026 21:55:36
+=== END   vit__patch_band_class_s42 10/25/2026 21:55:47  
+=== START vit__radpat_hpbw_class_s42 10/25/2026 21:55:47
+=== END   vit__radpat_hpbw_class_s42 10/25/2026 21:55:57  
+=== START vit_finetune_patch_perf_class_s43 10/25/2026 21:55:57
+=== END   vit_finetune_patch_perf_class_s43 10/25/2026 22:37:51  [vit_finetune_patch_perf_class_s43] TEST acc=0.607 macroF1=0.575 balAcc=0.647 ECE=0.062
+=== START vit_finetune_patch_perf_class_s44 10/25/2026 22:37:51
+=== NOTE 10/25/2026 22:44:59: chained phase-2 launcher started early (quoting bug); pre-registered s43/s44 ran concurrently with the revised s42 run, so their train_seconds are inflated. vit__ entries above were no-op failures (no adoption decision yet) and are ignored.
+=== END   vit_finetune_revised_patch_perf_class_s42 10/25/2026 23:14:46  [vit_finetune_revised_patch_perf_class_s42] TEST acc=0.683 macroF1=0.646 balAcc=0.660 ECE=0.062
+=== START cnn_patch_perf_class_s43 10/25/2026 23:14:46
+=== END   vit_finetune_patch_perf_class_s44 10/25/2026 23:31:03  [vit_finetune_patch_perf_class_s44] TEST acc=0.634 macroF1=0.590 balAcc=0.650 ECE=0.058
+=== PHASE 2 COMPLETE 10/25/2026 23:31:03
+=== END   cnn_patch_perf_class_s43 10/25/2026 23:34:25  [cnn_patch_perf_class_s43] TEST acc=0.691 macroF1=0.654 balAcc=0.668 ECE=0.084
+=== START cnn_patch_perf_class_s44 10/25/2026 23:34:25
+=== END   cnn_patch_perf_class_s44 10/25/2026 23:37:39  [cnn_patch_perf_class_s44] TEST acc=0.641 macroF1=0.618 balAcc=0.650 ECE=0.044
+=== START majority_patch_band_class 10/25/2026 23:37:39
+=== END   majority_patch_band_class 10/25/2026 23:37:45  [majority_patch_band_class] TEST acc=0.641 macroF1=0.260 balAcc=0.333 ECE=0.012
+=== START vit_linearprobe_patch_band_class 10/25/2026 23:37:45
+=== END   vit_linearprobe_patch_band_class 10/25/2026 23:37:53  [vit_linearprobe_patch_band_class] TEST acc=0.851 macroF1=0.811 balAcc=0.815 ECE=0.049
+=== START cnn_patch_band_class_s42 10/25/2026 23:37:53
+=== END   cnn_patch_band_class_s42 10/25/2026 23:40:41  [cnn_patch_band_class_s42] TEST acc=0.737 macroF1=0.657 balAcc=0.710 ECE=0.062
+=== START majority_radpat_hpbw_class 10/25/2026 23:40:41
+=== END   majority_radpat_hpbw_class 10/25/2026 23:40:47  [majority_radpat_hpbw_class] TEST acc=0.369 macroF1=0.180 balAcc=0.333 ECE=0.032
+=== START vit_linearprobe_radpat_hpbw_class 10/25/2026 23:40:47
+=== END   vit_linearprobe_radpat_hpbw_class 10/25/2026 23:43:58  [vit_linearprobe_radpat_hpbw_class] TEST acc=0.882 macroF1=0.884 balAcc=0.886 ECE=0.013
+=== START cnn_radpat_hpbw_class_s42 10/25/2026 23:43:58
+=== END   cnn_radpat_hpbw_class_s42 10/25/2026 23:50:37  [cnn_radpat_hpbw_class_s42] TEST acc=0.856 macroF1=0.856 balAcc=0.846 ECE=0.099
+=== QUEUE COMPLETE 10/25/2026 23:50:37
+{'rule': 'adopt revised iff val macro-F1 (seed 42) > pre-registered AND > linear probe', 'val_macro_f1': {'preregistered': 0.6600245683056252, 'linear_probe': 0.7016290088685476, 'revised': 0.6943896799318486}, 'adopted_profile': 'preregistered', 'final_mode': 'finetune', 'final_run_main': 'vit_finetune_patch_perf_class_s42'}
+=== START vit_finetune_patch_band_class_s42 10/25/2026 23:50:45
+=== END   vit_finetune_patch_band_class_s42 10/26/2026 00:07:21  [vit_finetune_patch_band_class_s42] TEST acc=0.695 macroF1=0.685 balAcc=0.724 ECE=0.039
+=== START vit_finetune_radpat_hpbw_class_s42 10/26/2026 00:07:21
+=== END   vit_finetune_radpat_hpbw_class_s42 10/26/2026 00:38:35  [vit_finetune_radpat_hpbw_class_s42] TEST acc=0.880 macroF1=0.881 balAcc=0.885 ECE=0.024
+=== START cnn_noaug_patch_perf_class_s42 10/26/2026 00:38:35
+=== END   cnn_noaug_patch_perf_class_s42 10/26/2026 00:48:35  [cnn_noaug_patch_perf_class_s42] TEST acc=0.740 macroF1=0.664 balAcc=0.683 ECE=0.048
+=== START vit_finetune_noaug_patch_perf_class_s42 10/26/2026 00:48:35
+=== END   vit_finetune_noaug_patch_perf_class_s42 10/26/2026 01:15:58  [vit_finetune_noaug_patch_perf_class_s42] TEST acc=0.729 macroF1=0.725 balAcc=0.737 ECE=0.084
+=== PHASE 2 COMPLETE 10/26/2026 01:15:58

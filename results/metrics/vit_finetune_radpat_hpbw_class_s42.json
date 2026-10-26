@@ -1,0 +1,182 @@
+{
+  "run": "vit_finetune_radpat_hpbw_class_s42",
+  "task": "hpbw_class",
+  "temperature": 1.0879936218261719,
+  "mode": "finetune",
+  "profile": "preregistered",
+  "augmentation": true,
+  "config": {
+    "model_name": "vit_small_patch16_224.augreg_in21k_ft_in1k",
+    "batch_size": 16,
+    "warmup_epochs": 2,
+    "finetune_epochs": 10,
+    "unfreeze_blocks": 4,
+    "lr_head": 0.001,
+    "lr_backbone": 3e-05,
+    "weight_decay": 0.01,
+    "dropout": 0.1,
+    "patience": 3
+  },
+  "dataset": "radpat",
+  "seed": 42,
+  "best_epoch": 5,
+  "best_val_macro_f1": 0.8790529973708877,
+  "epochs_run": 8,
+  "trainable_params": 7099779,
+  "total_params": 21666819,
+  "model": "vit_small_patch16_224.augreg_in21k_ft_in1k",
+  "train_seconds": 1689.3214428424835,
+  "torch": "2.14.1+cpu",
+  "timm": "1.0.30",
+  "cpu": "Intel64 Family 6 Model 142 Stepping 12, GenuineIntel",
+  "hardware": "CPU only (no CUDA)",
+  "splits": {
+    "train": {
+      "n": 2100,
+      "accuracy": 0.9061904761904762,
+      "macro_precision": 0.9058656897278862,
+      "macro_recall": 0.906339905127539,
+      "macro_f1": 0.9058909163194077,
+      "weighted_f1": 0.9057168086820173,
+      "balanced_accuracy": 0.906339905127539,
+      "ece": 0.024343434458687155,
+      "confusion_matrix": [
+        [
+          632,
+          54,
+          0
+        ],
+        [
+          51,
+          596,
+          60
+        ],
+        [
+          0,
+          32,
+          675
+        ]
+      ],
+      "per_class": {
+        "Narrow": {
+          "precision": 0.9253294289897511,
+          "recall": 0.9212827988338192,
+          "f1": 0.9233016800584368,
+          "support": 686
+        },
+        "Medium": {
+          "precision": 0.873900293255132,
+          "recall": 0.842998585572843,
+          "f1": 0.8581713462922966,
+          "support": 707
+        },
+        "Wide": {
+          "precision": 0.9183673469387755,
+          "recall": 0.9547383309759547,
+          "f1": 0.9361997226074896,
+          "support": 707
+        }
+      },
+      "roc_auc_ovr_macro": 0.9827188265510408,
+      "ece_uncalibrated": 0.01575257681664967
+    },
+    "val": {
+      "n": 450,
+      "accuracy": 0.8777777777777778,
+      "macro_precision": 0.8793862999745352,
+      "macro_recall": 0.8788038292074644,
+      "macro_f1": 0.8790529973708877,
+      "weighted_f1": 0.8780587560060119,
+      "balanced_accuracy": 0.8788038292074644,
+      "ece": 0.02293075468805099,
+      "confusion_matrix": [
+        [
+          126,
+          11,
+          0
+        ],
+        [
+          10,
+          125,
+          16
+        ],
+        [
+          0,
+          18,
+          144
+        ]
+      ],
+      "per_class": {
+        "Narrow": {
+          "precision": 0.9264705882352942,
+          "recall": 0.9197080291970803,
+          "f1": 0.9230769230769231,
+          "support": 137
+        },
+        "Medium": {
+          "precision": 0.8116883116883117,
+          "recall": 0.8278145695364238,
+          "f1": 0.819672131147541,
+          "support": 151
+        },
+        "Wide": {
+          "precision": 0.9,
+          "recall": 0.8888888888888888,
+          "f1": 0.8944099378881988,
+          "support": 162
+        }
+      },
+      "roc_auc_ovr_macro": 0.9695792196728469,
+      "ece_uncalibrated": 0.031794861488872075
+    },
+    "test": {
+      "n": 450,
+      "accuracy": 0.88,
+      "macro_precision": 0.8814886163373931,
+      "macro_recall": 0.8845495046148187,
+      "macro_f1": 0.8809657777334202,
+      "weighted_f1": 0.8782043165920866,
+      "balanced_accuracy": 0.8845495046148187,
+      "ece": 0.024002662499745666,
+      "confusion_matrix": [
+        [
+          112,
+          8,
+          1
+        ],
+        [
+          14,
+          129,
+          23
+        ],
+        [
+          0,
+          8,
+          155
+        ]
+      ],
+      "per_class": {
+        "Narrow": {
+          "precision": 0.8888888888888888,
+          "recall": 0.9256198347107438,
+          "f1": 0.9068825910931174,
+          "support": 121
+        },
+        "Medium": {
+          "precision": 0.8896551724137931,
+          "recall": 0.7771084337349398,
+          "f1": 0.8295819935691319,
+          "support": 166
+        },
+        "Wide": {
+          "precision": 0.8659217877094972,
+          "recall": 0.950920245398773,
+          "f1": 0.9064327485380117,
+          "support": 163
+        }
+      },
+      "roc_auc_ovr_macro": 0.9786737301744157,
+      "ece_uncalibrated": 0.02846312999725339
+    }
+  }
+}

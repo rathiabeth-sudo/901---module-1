@@ -1,0 +1,209 @@
+{
+  "run": "vit_linearprobe_patch_band_class",
+  "task": "band_class",
+  "temperature": 1.1887729167938232,
+  "mode": "linear_probe",
+  "dataset": "patch",
+  "C": 0.3,
+  "best_val_macro_f1": 0.8594764421900485,
+  "model": "vit_small_patch16_224.augreg_in21k_ft_in1k",
+  "trainable_params": 1155,
+  "splits": {
+    "train": {
+      "n": 1220,
+      "accuracy": 0.9377049180327869,
+      "macro_precision": 0.9132547798006018,
+      "macro_recall": 0.947111010596697,
+      "macro_f1": 0.9283832653337475,
+      "weighted_f1": 0.9388347619630991,
+      "balanced_accuracy": 0.947111010596697,
+      "ece": 0.09081867342611366,
+      "confusion_matrix": [
+        [
+          705,
+          45,
+          11
+        ],
+        [
+          10,
+          232,
+          4
+        ],
+        [
+          1,
+          5,
+          207
+        ]
+      ],
+      "per_class": {
+        "FR1_mid_below5GHz": {
+          "precision": 0.9846368715083799,
+          "recall": 0.926412614980289,
+          "f1": 0.9546377792823291,
+          "support": 761
+        },
+        "FR1_upper_5to7GHz": {
+          "precision": 0.8226950354609929,
+          "recall": 0.943089430894309,
+          "f1": 0.8787878787878788,
+          "support": 246
+        },
+        "FR3_6Gcandidate_above7GHz": {
+          "precision": 0.9324324324324325,
+          "recall": 0.971830985915493,
+          "f1": 0.9517241379310345,
+          "support": 213
+        }
+      },
+      "roc_auc_ovr_macro": 0.9933746572694551,
+      "ece_uncalibrated": 0.06604795074005274
+    },
+    "val": {
+      "n": 262,
+      "accuracy": 0.8854961832061069,
+      "macro_precision": 0.8469640702391935,
+      "macro_recall": 0.8740422124053838,
+      "macro_f1": 0.8594764421900485,
+      "weighted_f1": 0.8864251013457675,
+      "balanced_accuracy": 0.8740422124053838,
+      "ece": 0.044263317522243495,
+      "confusion_matrix": [
+        [
+          149,
+          12,
+          4
+        ],
+        [
+          7,
+          40,
+          4
+        ],
+        [
+          2,
+          1,
+          43
+        ]
+      ],
+      "per_class": {
+        "FR1_mid_below5GHz": {
+          "precision": 0.9430379746835443,
+          "recall": 0.9030303030303031,
+          "f1": 0.9226006191950464,
+          "support": 165
+        },
+        "FR1_upper_5to7GHz": {
+          "precision": 0.7547169811320755,
+          "recall": 0.7843137254901961,
+          "f1": 0.7692307692307693,
+          "support": 51
+        },
+        "FR3_6Gcandidate_above7GHz": {
+          "precision": 0.8431372549019608,
+          "recall": 0.9347826086956522,
+          "f1": 0.8865979381443299,
+          "support": 46
+        }
+      },
+      "roc_auc_ovr_macro": 0.9605613387672657,
+      "ece_uncalibrated": 0.04104546108212785
+    },
+    "test": {
+      "n": 262,
+      "accuracy": 0.851145038167939,
+      "macro_precision": 0.8098522356764115,
+      "macro_recall": 0.8154761904761904,
+      "macro_f1": 0.811479870294079,
+      "weighted_f1": 0.8497323189816781,
+      "balanced_accuracy": 0.8154761904761904,
+      "ece": 0.04935112387273206,
+      "confusion_matrix": [
+        [
+          152,
+          12,
+          4
+        ],
+        [
+          13,
+          36,
+          5
+        ],
+        [
+          4,
+          1,
+          35
+        ]
+      ],
+      "per_class": {
+        "FR1_mid_below5GHz": {
+          "precision": 0.8994082840236687,
+          "recall": 0.9047619047619048,
+          "f1": 0.9020771513353115,
+          "support": 168
+        },
+        "FR1_upper_5to7GHz": {
+          "precision": 0.7346938775510204,
+          "recall": 0.6666666666666666,
+          "f1": 0.6990291262135923,
+          "support": 54
+        },
+        "FR3_6Gcandidate_above7GHz": {
+          "precision": 0.7954545454545454,
+          "recall": 0.875,
+          "f1": 0.8333333333333334,
+          "support": 40
+        }
+      },
+      "roc_auc_ovr_macro": 0.9310970267087288,
+      "ece_uncalibrated": 0.04036149889333972
+    },
+    "ood": {
+      "n": 307,
+      "accuracy": 0.5635179153094463,
+      "macro_precision": 0.5901307189542484,
+      "macro_recall": 0.5583373193604962,
+      "macro_f1": 0.5284794538471603,
+      "weighted_f1": 0.5568241414641532,
+      "balanced_accuracy": 0.5583373193604962,
+      "ece": 0.26821278021507156,
+      "confusion_matrix": [
+        [
+          99,
+          17,
+          0
+        ],
+        [
+          23,
+          29,
+          9
+        ],
+        [
+          31,
+          54,
+          45
+        ]
+      ],
+      "per_class": {
+        "FR1_mid_below5GHz": {
+          "precision": 0.6470588235294118,
+          "recall": 0.853448275862069,
+          "f1": 0.7360594795539034,
+          "support": 116
+        },
+        "FR1_upper_5to7GHz": {
+          "precision": 0.29,
+          "recall": 0.47540983606557374,
+          "f1": 0.36024844720496896,
+          "support": 61
+        },
+        "FR3_6Gcandidate_above7GHz": {
+          "precision": 0.8333333333333334,
+          "recall": 0.34615384615384615,
+          "f1": 0.4891304347826087,
+          "support": 130
+        }
+      },
+      "roc_auc_ovr_macro": 0.789323122691375,
+      "ece_uncalibrated": 0.29141532859364405
+    }
+  }
+}

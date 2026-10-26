@@ -1,0 +1,81 @@
+# Module 1 - Vision Transformer image module. Central configuration: every script in src/ reads this file.
+seed: 42
+num_threads: 4
+
+paths:
+  raw: data/raw
+  processed: data/processed
+  splits: data/splits
+  results: results
+  checkpoints: results/checkpoints   # git-ignored
+
+datasets:
+  patch:
+    # Hugging Face: becklabash/rectangular-patch-antenna-freq-response (MIT licence)
+    repo_id: becklabash/rectangular-patch-antenna-freq-response
+    revision: 4be72a22e55fbf46966c59a5d6b3ec95c836379b
+    file: data/train-00000-of-00001.parquet
+  radpat:
+    # Zenodo record 17067881 (RadPat-50K v1.1, CC-BY-4.0); only the 10K polar subset is used
+    record: 17067881
+    metadata_file: Metadata_10K.csv
+    images_zip: Polar_10K.zip
+    subsample: 3000
+
+labels:
+  # Matching thresholds. -10 dB (VSWR ~1.92) is the conventional impedance-bandwidth criterion.
+  # -20 dB as the "high" boundary is a project ASSUMPTION that requires engineering confirmation.
+  s11_matched_db: -10.0
+  s11_high_db: -20.0
+  # Band edges (GHz) from 3GPP TS 38.101-1 (FR1 upper edge 7.125 GHz; n77 3.3-4.2, n79 4.4-5.0).
+  band_edges_ghz: [5.0, 7.125]
+  band_names: ["FR1_mid_below5GHz", "FR1_upper_5to7GHz", "FR3_6Gcandidate_above7GHz"]
+  perf_names: ["Poor", "Acceptable", "High"]
+  hpbw_names: ["Narrow", "Medium", "Wide"]
+
+split:
+  train: 0.70
+  val: 0.15
+  test: 0.15
+  # Out-of-distribution hold-out: the widest patches (W/L ratio above this) never enter train/val/test.
+  ood_wl_ratio_min: 1.95
+
+render:
+  size: 224          # final image size (pixels)
+  supersample: 4     # render at 4x then downsample (anti-aliasing keeps sub-pixel feed position)
+
+vit:
+  model_name: vit_small_patch16_224.augreg_in21k_ft_in1k
+  batch_size: 16
+  warmup_epochs: 2         # stage A: head only
+  finetune_epochs: 10      # stage B: head + last N blocks
+  unfreeze_blocks: 4
+  lr_head: 1.0e-3
+  lr_backbone: 3.0e-5
+  weight_decay: 0.01
+  dropout: 0.1
+  patience: 3              # early stopping on validation macro-F1 (reduced from 8 for CPU budget)
+
+# POST-HOC REVISION (added 25 Oct 2026 after the pre-registered seed-42 run). That run underfitted:
+# train acc ~0.70, still rising; best val macro-F1 0.660 < linear-probe val 0.702. Its test score had been
+# printed before this decision, which is disclosed in docs/HYPOTHESES.md. Only optimisation settings change
+# (labels, split, augmentation and data are unchanged). The revision is adopted only if its VALIDATION macro-F1
+# beats both the pre-registered config and the linear probe.
+vit_revised:
+  model_name: vit_small_patch16_224.augreg_in21k_ft_in1k
+  batch_size: 16
+  warmup_epochs: 2
+  finetune_epochs: 15
+  unfreeze_blocks: 6
+  lr_head: 1.0e-3
+  lr_backbone: 1.0e-4
+  weight_decay: 0.01
+  dropout: 0.1
+  patience: 5
+
+cnn:
+  batch_size: 32
+  epochs: 25
+  lr: 1.0e-3
+  weight_decay: 1.0e-4
+  patience: 5

@@ -1,0 +1,11 @@
+{
+  "rule": "adopt revised iff val macro-F1 (seed 42) > pre-registered AND > linear probe",
+  "val_macro_f1": {
+    "preregistered": 0.6600245683056252,
+    "linear_probe": 0.7016290088685476,
+    "revised": 0.6943896799318486
+  },
+  "adopted_profile": "preregistered",
+  "final_mode": "finetune",
+  "final_run_main": "vit_finetune_patch_perf_class_s42"
+}

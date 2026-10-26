@@ -1,0 +1,54 @@
+{
+  "run": "vit_finetune_patch_perf_class_s42",
+  "n_test": 262,
+  "mean_patch_mass": 0.32014095150348404,
+  "mean_patch_area_share": 0.31299261713273097,
+  "median_patch_enrichment": 1.0270788490845555,
+  "mean_feed_mass": 0.006736123605147602,
+  "mean_feed_area_share": 0.0045318342031469075,
+  "median_feed_enrichment": 1.4065911947229885,
+  "share_designs_feed_enrichment_gt1": 1.0,
+  "mean_top_panel_mass": 0.5111552985667852,
+  "feed_enrichment_correct_vs_wrong": [
+    1.385449343738931,
+    1.441754500081561
+  ],
+  "note": "enrichment = attention share / area share; 1.0 = no preference",
+  "robustness": {
+    "none": {
+      "macro_f1": 0.5809514822678304,
+      "accuracy": 0.6259541984732825,
+      "agreement_with_clean": 1.0
+    },
+    "translate_4px": {
+      "macro_f1": 0.5830456556263007,
+      "accuracy": 0.6679389312977099,
+      "agreement_with_clean": 0.8778625954198473
+    },
+    "rotate_3deg": {
+      "macro_f1": 0.6152228738420586,
+      "accuracy": 0.6564885496183206,
+      "agreement_with_clean": 0.916030534351145
+    },
+    "gaussian_blur_r1": {
+      "macro_f1": 0.5262444684410003,
+      "accuracy": 0.5229007633587787,
+      "agreement_with_clean": 0.8320610687022901
+    },
+    "contrast_0.8": {
+      "macro_f1": 0.581017422170616,
+      "accuracy": 0.6106870229007634,
+      "agreement_with_clean": 0.9618320610687023
+    },
+    "jpeg_q30": {
+      "macro_f1": 0.5747016119109142,
+      "accuracy": 0.6297709923664122,
+      "agreement_with_clean": 0.9389312977099237
+    },
+    "copper_to_grey": {
+      "macro_f1": 0.5214725318358434,
+      "accuracy": 0.5648854961832062,
+      "agreement_with_clean": 0.8282442748091603
+    }
+  }
+}
