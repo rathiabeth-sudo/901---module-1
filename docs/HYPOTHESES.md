@@ -1,6 +1,6 @@
 # Pre-registered research questions and hypotheses
 
-> **Module 1 repository note.** This is the original pre-registration, committed before any fine-tuned result existed, kept unchanged. H1-H5 are evaluated in this repository. H6 (fusion) is evaluated in the companion Module 2 repository (`module2-numerical-surrogate-antenna-design`).
+> **Module 1 repository note.** This is the original pre-registration, committed before any fine-tuned result existed, kept unchanged. H1-H5 are evaluated in this repository. H6 (fusion) is evaluated in the companion Module 2 repository (`902---Module-2`).
 
 Committed to Git **before** any fine-tuned ViT, CNN, fusion or explainability result existed
 (see the commit timestamp of this file). One result had already been printed at that point: the frozen

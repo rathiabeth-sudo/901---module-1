@@ -28,8 +28,8 @@ MODULE = "Module 1 - Image-Based Vision Transformer"
 TITLE = "Vision Transformer-Based Visual Analysis of Hybrid-Slotted DGS Compact Patch Antennas"
 SUBTITLE = "Module 1 of the Applied Vision Transformer Framework for 5G and Emerging 6G Networks - Proof-of-Concept Prototype"
 # Set this once after creating the GitHub repository; every deliverable reads it from here.
-REPO_URL = "https://github.com/rathiabeth/module1-vit-antenna-image-classification"
-COMPANION_URL = "https://github.com/rathiabeth/module2-numerical-surrogate-antenna-design"
+REPO_URL = "https://github.com/rathiabeth-sudo/901---module-1"
+COMPANION_URL = "https://github.com/rathiabeth-sudo/902---Module-2"
 
 
 def j(name):
