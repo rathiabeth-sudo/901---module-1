@@ -64,7 +64,7 @@ def main():
     hd.add_patch(Rectangle((0, 0), 1, 1, fc=NAVY, transform=hd.transAxes))
     hd.text(0.5, 0.70, TITLE, color="white", fontsize=25, fontweight="bold", ha="center", va="center")
     hd.text(0.5, 0.40, SUBTITLE, color="#cfe2f3", fontsize=15, ha="center", va="center")
-    hd.text(0.5, 0.13, "[Student name]  |  [Student ID]  |  [Programme / Module]  |  [Institution]  |  Applied AI Research Workshop - Module 1, October 2026",
+    hd.text(0.5, 0.13, "Ms. Rathi Devadhas  |  Student ID 1737089  |  Master of Applied Artificial Intelligence  |  Applied AI Research Workshop - Module 1  |  26 October 2026",
             color="white", fontsize=11.5, ha="center", va="center", style="italic")
 
     # ---------------- column 1

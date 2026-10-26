@@ -36,7 +36,7 @@ def availability(C) -> list:
         ["", "Per-run metrics, training histories, McNemar and bootstrap tests", L("results/metrics", folder=True)],
         ["", "Per-design test predictions with calibrated confidence", L("results/predictions", folder=True)],
         ["", "Explainability summary (attention enrichment, robustness)", L("results/metrics/explainability_summary.json")],
-        ["", "All figures used in this report", L("results/figures", folder=True)],
+        ["", "All figures produced by the project", L("results/figures", folder=True)],
         ["", "Image embeddings handed to Module 2", L("results/features", folder=True)],
         ["", "Report, slides and poster", L("reports", folder=True) + "; " + L("presentations", folder=True) + "; " + L("poster", folder=True)],
     ]
@@ -102,7 +102,7 @@ def build(R) -> list:
 
     # ------------------------------------------------------------------ Abstract
     a(("h1", "Abstract"))
-    a(("p", "This report documents the implementation and evaluation of Module 1 of a two-module applied-AI framework for "
+    a(("p", "This project implements and evaluates Module 1 of a two-module applied-AI framework for "
             "hybrid-slotted defected ground structure (DGS) compact patch antennas: an image-based Vision Transformer (ViT) that "
             "classifies antenna performance from standardised images and explains which image regions drive its predictions. "
             "No licensed public dataset of Ansys HFSS images of hybrid-slotted DGS antennas exists, and HFSS was not available, so "
@@ -130,10 +130,10 @@ def build(R) -> list:
             "that reads standardised antenna geometry and electromagnetic field images, predicts a documented performance class, and "
             "shows which regions of the image influence each prediction. The tool is a rapid screening aid, not a replacement for "
             "full-wave simulation."))
-    a(("p", "The research objective of this module is unchanged from that report: **to investigate whether standardised antenna "
+    a(("p", "The research objective of Module 1 is unchanged from the original research proposal: **to investigate whether standardised antenna "
             "geometry and electromagnetic images can support antenna-performance classification and explainable visual analysis.** "
             "Module 1 is the image branch of the overall framework. The numerical-text surrogate, the multimodal fusion stage and the "
-            "NSGA-II optimisation form Module 2, which is documented in a separate report and repository "
+            "NSGA-II optimisation form Module 2, a companion project in its own repository "
             f"({COMPANION_URL}). The only artefact Module 1 passes to Module 2 is the 384-dimensional image embedding of each design."))
     a(("table", C.tab("Implementation status of Module 1."), ["Component", "Status", "Evidence in repository"], [
         ["Dataset discovery and licence verification", "Completed", link("docs/DATASET_SURVEY.md")],
@@ -460,7 +460,7 @@ def build(R) -> list:
        [[r.dataset, r.task, r["mode"], "–" if pd.isna(r.seed) else int(r.seed), f"{r.macro_f1:.3f}", f"{r.accuracy:.3f}", f"{r.ece:.3f}",
          "–" if pd.isna(r.train_seconds) else f"{r.train_seconds / 60:.1f}"] for _, r in allr.iterrows()]))
     a(("p", "Failed or abandoned runs: the first CNN design (four double-convolution blocks at full resolution, about 60 s per epoch) was "
-            "stopped after three epochs to save compute and replaced by the stride-2 stem version reported here. A first training "
+            "stopped after three epochs to save compute and replaced by the stride-2 stem version reported in Section 7. A first training "
             "queue was restarted as a detached, resumable process; partial runs were discarded and re-run from scratch. Because of a "
             "launcher quoting error, the pre-registered ViT seeds 43 and 44 and CNN seed 43 ran concurrently with other jobs; their "
             "results are unaffected, but their training times are inflated and should not be compared. The first definition of "
@@ -501,13 +501,12 @@ META = {
     "title": TITLE,
     "subtitle": SUBTITLE,
     "doc_type": "Module 1: Image-Based Vision Transformer for Antenna Performance Classification and Explainable Visual Analysis",
-    "fields": [("Student name", "[to be completed by student]"), ("Student ID", "[to be completed by student]"),
-               ("Programme / Module", "[to be completed by student]"), ("Institution", "[to be completed by student]"),
-               ("Submission date", "[to be completed by student]"), ("Report generated", "26 October 2026"),
+    "fields": [("Student name", "Ms. Rathi Devadhas"), ("Student ID", "1737089"),
+               ("Programme", "Master of Applied Artificial Intelligence"),
+               ("Submission date", "26 October 2026"),
                ("Code repository", REPO_URL)],
-    "note": "Bracketed fields are deliberate placeholders for personal details that were not provided. All results are from executed "
-            "experiments on public simulation data. Ansys HFSS was not available and was not run.",
-    "author": "",
+    "note": "All results are from executed experiments on public simulation data. Ansys HFSS was not available and was not run.",
+    "author": "Ms. Rathi Devadhas",
 }
 
 
